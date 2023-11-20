@@ -37,6 +37,8 @@ LOG_MODULE_REGISTER(Lesson4_Exercise2, LOG_LEVEL_INF);
 #define CON_STATUS_LED DK_LED2
 #define USER_LED DK_LED3
 #define USER_BUTTON DK_BTN1_MSK
+#define USER_BUTTON2 DK_BTN2_MSK
+
 
 #define STACKSIZE 1024
 #define PRIORITY 7
@@ -47,6 +49,8 @@ LOG_MODULE_REGISTER(Lesson4_Exercise2, LOG_LEVEL_INF);
 static bool app_button_state;
 /* STEP 15 - Define the data you want to stream over Bluetooth LE */
 static uint32_t app_sensor_value = 100;
+
+int suunta;
 
 static const struct bt_data ad[] = {
 	BT_DATA_BYTES(BT_DATA_FLAGS, (BT_LE_AD_GENERAL | BT_LE_AD_NO_BREDR)),
@@ -86,6 +90,7 @@ void send_data_thread(void)
 		printk("x = %d,  y = %d,  z = %d\n",m.x,m.y,m.z);
 
 		/* Send notification, the function sends notifications only if a client is subscribed */
+		my_lbs_send_sensor_notify(suunta);
 		my_lbs_send_sensor_notify(m.x);
 		my_lbs_send_sensor_notify(m.y);
 		my_lbs_send_sensor_notify(m.z);
@@ -100,6 +105,17 @@ static struct my_lbs_cb app_callbacks = {
 	.button_cb = app_button_cb,
 };
 
+static void suuntaFunktio()
+{
+	suunta++;
+	if (suunta > 5){
+		suunta = 0;
+	}
+	printk("\nSuunta: %d \n\nSuunta info:\n0 = x akseli maata kohti = suuri arvo\n1 = x akseli taivasta kohti = pieni arvo\n2 = y akseli maata kohti = suuri arvo\n3 = y akseli taivasta kohti = pieni arvo\n4 = z akseli maata kohti = suuri arvo\n5 = z akseli taivasta kohti = pieni arvo\n\n",suunta);
+}
+
+
+
 static void button_changed(uint32_t button_state, uint32_t has_changed)
 {
 	if (has_changed & USER_BUTTON) {
@@ -108,7 +124,16 @@ static void button_changed(uint32_t button_state, uint32_t has_changed)
 		my_lbs_send_button_state_indicate(user_button_state);
 		app_button_state = user_button_state ? true : false;
 	}
+
+	if ((has_changed & USER_BUTTON2) && (button_state & USER_BUTTON2)) {
+		uint32_t user_button_state = button_state & USER_BUTTON2;
+		/* STEP 6 - Send indication on a button press */
+		suuntaFunktio();
+	}
 }
+
+
+
 static void on_connected(struct bt_conn *conn, uint8_t err)
 {
 	if (err) {
