@@ -34,7 +34,7 @@ ax.set_title('3D Scatter Plot of Accelerometer Data')
 plt.show()
 
 # pyöritä K-means algoritmi
-num_centroids = 4  
+num_centroids = 6  
 final_centroids = k_means(data, num_centroids, iterations=10)
 
 # keskipisteet C-lähdekooditiedostoon
@@ -44,7 +44,7 @@ for centroid in final_centroids:
 formatted_centroids += "};\n"
 
 # tallenna muotoillut keskipisteet 'keskipisteet.h' tiedostoon
-header_file_path = 'keskipisteet.h'  
+header_file_path = 'keskipisteet2.h'  
 with open(header_file_path, 'w') as header_file:
     header_file.write(formatted_centroids)
 
