@@ -101,9 +101,9 @@ int calculateDistanceToAllCentrePointsAndSelectWinner(int x,int y,int z)
    
    for (int i = 0; i < 6; i++)
    {
-      float xDif = abs(x - CP[i][0]);
-      float yDif = abs(y - CP[i][1]);
-      float zDif = abs(z - CP[i][2]);
+      float xDif = abs(CP[i][0] - x);
+      float yDif = abs(CP[i][1] - y);
+      float zDif = abs(CP[i][2] - z);
 
       float totalDif = xDif + yDif + zDif; 
       
