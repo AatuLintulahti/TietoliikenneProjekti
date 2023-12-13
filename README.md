@@ -13,8 +13,8 @@ The Raspberry Pi plays an important role in this process, acting as a bridge bet
 
 database connections and APIs
 
-A key feature of this framework is the addition of a TCP socket interface and a simple HTTP API for database communication. These interfaces provide robust and flexible tools for data acquisition and manipulation. The TCP socket interface is particularly suited for real-time data communication, while the HTTP API provides a more standardized and consistent way to access data
+A key feature of this framework is the addition of a TCP socket interface and a simple HTTP API for database communication. These interfaces provide robust and flexible tools for data acquisition and manipulation. The TCP socket interface is particularly good for real-time data communication, and the HTTP API provides a more standardized and consistent way to access data
 
 Data acquisition and machine learning applications
 
-The core of this project is to retrieve hidden data for machine learning. Students will develop a customized program to retrieve data from a MySQL database using an HTTP interface on their own computer. This data is then processed, once acquired, and used in machine learning applications. The focus is on the potential application of the collected data in machine learning models, exploring its potential in predictive analytics, pattern recognition, and other related applications
+The core of this project is to retrieve hidden data for machine learning. Developers have created a customized program that retrieves data from a MySQL database using an HTTP interface on a physical PC. This data is then processed and used in machine learning application K-Means. The focus is on the potential application of the collected data in machine learning models, exploring its potential in predictive analytics, pattern recognition etc.
